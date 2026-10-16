@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+.env
+.env.*
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Model weights and checkpoints
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+*.h5
+*.hdf5
+
+# Large datasets and generated artifacts
+*.parquet
+*.arrow
+*.npy
+*.npz
+*.pkl
+*.pickle
+
+# Experiment outputs
+runs/
+wandb/
+mlruns/
+lightning_logs/
+outputs/
+logs/
+
+# Local NAS links and paths
+nas/
+nas-data/
+data-local/

@@ -88,3 +88,35 @@ track-a/{agent,rag,small-llm,document-ai}/; track-b/{vision,voice,time-series,re
 
 - [System Architecture Design](docs/architecture/System_Architecture_Design.md)
 - [Word 버전](docs/architecture/System_Architecture_Design.docx)
+
+## 연구 코드 및 데이터 저장 원칙
+
+연구 코드와 대용량 연구 데이터는 분리하여 관리한다.
+
+| 구분 | 저장 위치 | 관리 대상 |
+|---|---|---|
+| GitHub | `Industrial-AI-Lab` 저장소 | 소스 코드, 설정 예제, 테스트, 실험 절차, 운영 문서 |
+| 연구 NAS | `/mnt/nas-industrial-ai` | 데이터셋, 모델 가중치, 체크포인트, 임베딩, 대용량 실험 결과 |
+
+### 연구 NAS 디렉터리
+
+- `datasets/` — 원본 및 가공 데이터셋
+- `models/` — 학습·배포용 모델
+- `checkpoints/` — 학습 중간 저장 파일
+- `embeddings/` — 벡터 및 임베딩 데이터
+- `experiments/` — 실험 결과와 대용량 산출물
+- `shared/` — 연구자 간 공유 자료
+
+### 운영 규칙
+
+1. 소스 코드와 재현 가능한 실험 설정은 GitHub에서 버전 관리한다.
+2. 대용량 데이터와 모델 파일은 NAS에 저장하며 GitHub에 직접 업로드하지 않는다.
+3. `.gitignore`를 사용해 데이터 및 모델 산출물의 실수로 인한 업로드를 방지한다.
+4. PAT, SSH 개인 키, 비밀번호 및 기타 인증 정보는 GitHub에 저장하지 않는다.
+5. 실험 코드에서는 NAS 경로를 하드코딩하기보다 환경변수 `IAI_NAS_ROOT`를 활용한다.
+6. NAS 접근 권한 및 운영 절차는 저장소의 `NAS.md`를 참고한다.
+
+### GitHub SSH 인증
+
+DGX Spark에서는 GitHub 전용 SSH 키를 사용한다. 설정 및 사용 방법은
+[GitHub SSH 운영 가이드](docs/GITHUB_SSH.md)를 참고한다.
